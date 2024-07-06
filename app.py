@@ -6,7 +6,7 @@ import tensorflow as tf
 def mnist_classifier(img):
     #img = tf.image.resize(img, [28, 28])
     #img = tf.cast(img, tf.float32)
-    return img
+    return img[0]
 
 demo = gr.Interface(fn=mnist_classifier, inputs="sketchpad", outputs="image")
 demo.launch()
