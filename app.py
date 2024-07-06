@@ -3,6 +3,7 @@ import tensorflow as tf
 import numpy as np
 
 model = tf.saved_model.load("/home/user/app/model")
+print(dir(model))
 
 def mnist_classifier(img):
     img_tensor = tf.convert_to_tensor(img['composite'], dtype=tf.float32)
@@ -12,8 +13,6 @@ def mnist_classifier(img):
     img_tensor /= 255.0
     img_tensor = tf.expand_dims(img_tensor, 0)
 
-    prediction = model(img_tensor)
-    print(prediction)
     #prediction = model.signatures['serving_default'](img_tensor)
     #print(model.signatures['serving_default'].structured_outputs)
     #return str(tf.argmax(prediction['output_0'], axis=1).numpy()[0])
