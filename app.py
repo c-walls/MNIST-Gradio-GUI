@@ -1,7 +1,12 @@
 import gradio as gr
+import tensorflow as tf
 
-def greet(name):
-    return "Hi " + name + "!!"
+model = tf.keras.models.load_model("mnist_checker/model/saved_model.pb")
 
-demo = gr.Interface(fn=greet, inputs="sketchpad", outputs="label")
+def mnist_classifier(img):
+    #img = tf.image.resize(img, [28, 28])
+    #img = tf.cast(img, tf.float32)
+    return img
+
+demo = gr.Interface(fn=mnist_classifier, inputs="sketchpad", outputs="image")
 demo.launch()
