@@ -7,7 +7,6 @@ def mnist_classifier(img):
     #img = tf.image.resize(img, [28, 28])
     #img = tf.cast(img, tf.float32)
     print(img)
-    print(img.shape)
     return "returned: " + img
 
 demo = gr.Interface(fn=mnist_classifier, inputs="sketchpad", outputs="text", title="MNIST Checker", description="Draw a number 0-9 to see if the model can classify it.")
