@@ -1,14 +1,19 @@
 import gradio as gr
 import tensorflow as tf
 
-#model = tf.keras.models.load_model("mnist_checker/model/saved_model.pb")
+model = tf.keras.models.load_model("saved_model.pb")
 
 def mnist_classifier(img):
-    #img = tf.image.resize(img, [28, 28])
-    #img = tf.cast(img, tf.float32)
-    print("Background: " + len(img['background']) + type(img['background']))
-    print("Composite: " + len(img['composite']) + type(img['composite']))
-    print("Layers: " + len(img['layers']) + type(img['layers']))
+    # Convert the image input to a tensor
+    img_tensor = tf.convert_to_tensor(img['composite'], dtype=tf.float32)
+    img_tensor = tf.image.resize(img_tensor, [28, 28])
+    
+    # Normalize and expand to add the batch dimension
+    img_tensor /= 255.0
+    img_tensor = tf.expand_dims(img_tensor, 0)
+
+    #prediction = model.predict(img_tensor)
+    return "Hi"
 
 demo = gr.Interface(fn=mnist_classifier, inputs="sketchpad", outputs="text", title="MNIST Checker", description="Draw a number 0-9 to see if the model can classify it.")
-demo.launch()
+demo.launch(share=True)
