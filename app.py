@@ -3,7 +3,8 @@ import tensorflow as tf
 import numpy as np
 
 model = tf.saved_model.load("/home/user/app/model")
-print(dir(model))
+concrete_functions = list(model.signatures.values())
+print(f"Found {len(concrete_functions)} concrete functions.")
 
 def mnist_classifier(img):
     img_tensor = tf.convert_to_tensor(img['composite'], dtype=tf.float32)
