@@ -1,7 +1,7 @@
 import gradio as gr
 import tensorflow as tf
 
-model = tf.keras.models.load_model("/home/user/app/saved_model.pb")
+model = tf.saved_model.load("/home/user/app/model")
 
 def mnist_classifier(img):
     # Convert the image input to a tensor
